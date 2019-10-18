@@ -1,0 +1,15 @@
+sudo:       required
+language:   generic
+services:   docker
+
+# Docs of the options: https://github.com/Strauman/travis-latexbuild/tree/master#configuration-options
+tex-config:
+- tex-scheme=full
+- push-type=none
+- build-pattern=master.tex
+- latexmk-flags=-pdf
+
+
+# We will use the docker image from https://hub.docker.com/r/phpirates/texlive-latexbuild/
+script:
+- docker run --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind phpirates/texlive-latexbuild:small-2018
